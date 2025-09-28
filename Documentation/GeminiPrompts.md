@@ -6,3 +6,4 @@ EXERCISE 1:
 5) Update the file using the equation "y=B0 + B1x", find the values of B0 and B1 using vectors. Don't forget to  draw the regression line in the graph and print in a text box the regression equation, explain the code, output the scritp to simulation5 file
 
 EXERCISE 2:
+Create a new python file named simulation6.py to run another simulation, use the       equation in the form of "y = b1x1 + b2x2 + b3x3 + b4x4 + .... b50x50+ r"  where xn is a property, y is the height and r is a random number, generate 1000 samples. use vectors and linear algebra, add explanation to the code. Don't forget to draw the regression line and the original equation and regression equation in a text box. Save the graph in an image file named simulation6.png 
