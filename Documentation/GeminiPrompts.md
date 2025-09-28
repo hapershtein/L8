@@ -1,5 +1,8 @@
+EXERCISE 1:
 1) Create a new file in python that runs a simulation of 1000 random samples of weight and height in of people, the weight should be in kilograms and the height in centimeters. Draw them in a two dimentional grid and print the equation used to generate them in a text box inside the graph.
 2) Create a new python file named simulation2.py to run another simulation, use the equation in the form of "y = ax + b + r" where x is the weight, y is the height and r is a random number, generate 1000 samples.  Print the equation and the equation of the regression line in a text box in the graph, save the graph in an image file named simulation2.png
 3) Now normalize the data in the simulation and save the output scritp in a new file simulation3
 4) Update the script to use vectors and linear algebra, add explanation to the code. Don't forget to draw the   regression line and the original equation and regression equation in a text box. Output the script in a new file simulation4 
 5) Update the file using the equation "y=B0 + B1x", find the values of B0 and B1 using vectors. Don't forget to  draw the regression line in the graph and print in a text box the regression equation, explain the code, output the scritp to simulation5 file
+
+EXERCISE 2:
