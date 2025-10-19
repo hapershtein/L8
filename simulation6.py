@@ -1,6 +1,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 # Set a seed for reproducibility
 np.random.seed(42)
@@ -78,7 +79,57 @@ plt.ylabel('Predicted Height (y_predicted)')
 plt.legend()
 plt.grid(True)
 
-# Save the plot to a file
-plt.savefig('simulation6.png')
+# Save the plot to a file (ensure Documentation directory exists)
+output_dir = os.path.join(os.path.dirname(__file__) if '__file__' in globals() else os.getcwd(), 'Documentation')
+os.makedirs(output_dir, exist_ok=True)
+plot_path = os.path.join(output_dir, 'simulation6.png')
+plt.savefig(plot_path)
+plt.close()
 
-print("Simulation complete. Graph saved to simulation6.png")
+# Save results summary into a Markdown file inside Documentation
+results_md_path = os.path.join(output_dir, 'Results.md')
+try:
+    with open(results_md_path, 'w', encoding='utf-8') as md:
+        md.write('# Results: simulation6\n\n')
+        md.write('## Generated plot\n\n')
+        # Use relative path for image so the markdown file references the image in the same folder
+        md.write('![Actual vs Predicted](simulation6.png)\n\n')
+
+        md.write('## Inputs\n\n')
+        md.write(f'- num_samples: {num_samples}\n')
+        md.write(f'- num_features: {num_features}\n')
+        # show first 5 true coefficients
+        try:
+            first_true = ', '.join(f'{float(x):.4f}' for x in true_coefficients.flatten()[:5])
+        except Exception:
+            first_true = 'N/A'
+        md.write(f'- true_coefficients (first 5): {first_true}\n')
+        md.write('- noise distribution: normal(0,1) scaled by 5\n\n')
+
+        md.write('## Equations\n\n')
+        md.write(f'- Original (excerpt): {original_eq}\n')
+        md.write(f'- Regression (excerpt): {regression_eq}\n\n')
+
+        md.write('## Estimated coefficients (first 5)\n\n')
+        try:
+            est_first = ', '.join(f'{float(x):.4f}' for x in estimated_coefficients.flatten()[:5])
+        except Exception:
+            est_first = 'N/A'
+        md.write(f'- {est_first}\n\n')
+
+        md.write('## Metrics\n\n')
+        try:
+            ss_res = np.sum((y - y_predicted) ** 2)
+            ss_tot = np.sum((y - np.mean(y)) ** 2)
+            r2 = 1 - ss_res / ss_tot
+            md.write(f'- R²: {r2:.4f}\n')
+        except Exception:
+            md.write('- R²: N/A\n')
+    md_created = True
+except Exception as e:
+    md_created = False
+    print(f'Warning: failed to write Results.md: {e}')
+
+print(f"Simulation complete. Graph saved to {plot_path}")
+if md_created:
+    print(f"Results written to {results_md_path}")
